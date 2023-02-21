@@ -2,6 +2,19 @@ html, body, #root, #app {
   height: 100%;
 }
 
-.iconCenter {
-  vertical-align: -2px;
+.customIconRadio{
+  opacity: 0;
+  position: absolute;
+}
+
+.customIconRadio:focus + label {
+  outline: 1px solid #ddd;
+}
+
+.card a, nav a {
+  text-decoration: none !important;
+}
+
+.card a:visited, .card a:hover {
+  color: inherit !important;
 }

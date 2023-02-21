@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const searchTermSlice = createSlice({
     name: 'searchTerm',
     initialState: '',
@@ -10,7 +11,8 @@ const searchTermSlice = createSlice({
         clearSearchTerm: (searchTerm) => {
             return '';
         }
-    }
+    },
+
 })
 
 export const { setSearchTerm, clearSearchTerm } = searchTermSlice.actions;

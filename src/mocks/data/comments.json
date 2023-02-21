@@ -1,0 +1,36 @@
+{
+    "comments": [
+        {
+            "itemName": "Apple",
+            "author": "Tom",
+            "text": "hi",
+            "rating": 1,
+            "isRecommend": false,
+            "date": "2023-01-01 13:00:00"
+        },
+        {
+            "itemName": "Apple",
+            "author": "Jane",
+            "text": "hello goodddd",
+            "rating": 5,
+            "isRecommend": true,
+            "date": "2023-01-01 13:00:00"
+        },
+        {
+            "itemName": "Orange",
+            "author": "Smith",
+            "text": "Bye bye",
+            "rating": 3,
+            "isRecommend": false,
+            "date": "2023-01-01 13:00:00"
+        },
+        {
+            "itemName": "Banana",
+            "author": "Apple",
+            "text": "Goooooddd Product!!!",
+            "rating": 4,
+            "isRecommend": true,
+            "date": "2023-01-01 13:00:00"
+        }
+    ]
+}

@@ -1,16 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchTerm, clearSearchTerm, selectSearchTerm } from "./searchTermSlice";
-import { Button, Form, InputGroup, CloseButton } from 'react-bootstrap';
+import { Form, InputGroup, CloseButton } from 'react-bootstrap';
 import { Icon } from '../../utilities/Icon';
 
 export default function SearchTerm() {
     const dispatch = useDispatch();
     const searchTerm = useSelector(selectSearchTerm);
 
-    const onChangeHandler = ({target}) => {
-        console.log(target.value);
-        dispatch(setSearchTerm(target.value));
+    const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+        dispatch(setSearchTerm(e.currentTarget.value));
     }
 
     const onClearHandler = () => {
