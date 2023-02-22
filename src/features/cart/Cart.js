@@ -39,7 +39,7 @@ export default function Cart() {
 			>
 				{name}
 				<span className="float-end">
-					<span className="text-secondary fw-normal me-2">
+					<span className=" fw-normal me-2">
 						@<PriceDisplay price={price} />
 					</span>
 					<Form.Select

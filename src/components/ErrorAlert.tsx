@@ -16,9 +16,12 @@ const ErrorAlert = ({
 		<Container>
 			<Alert variant="danger" className="mt-4">
 				{isRouteErrorResponse(error) ? (
-					<Alert.Heading>
-						{document.title}: {error.status} {error.statusText}
-					</Alert.Heading>
+					<>
+						<Alert.Heading>
+							{document.title}: {error.status} {error.statusText}
+						</Alert.Heading>
+						<p>{error.data}</p>
+					</>
 				) : (
 					<>
 						<Alert.Heading>{document.title}: 404 NOT FOUND</Alert.Heading>

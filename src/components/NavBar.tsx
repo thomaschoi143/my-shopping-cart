@@ -1,12 +1,14 @@
 import React from "react";
-import { Navbar, Container, Offcanvas, NavDropdown, Nav } from "react-bootstrap";
+import { Navbar, Container, Offcanvas, NavDropdown, Nav, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import SearchTerm from "../features/searchTerm/SearchTerm";
+import DarkModeSwitch from "./darkModeSwitch";
 
-export default function NavBar(): JSX.Element {
+export default function NavBar() {
 	const expand = "md";
+
 	return (
-		<Navbar bg="light" expand={expand} className="mb-3">
+		<Navbar expand={expand} className="mb-3">
 			<Container fluid>
 				<Link to="/">
 					<Navbar.Brand className="h1">My Shopping Cart</Navbar.Brand>
@@ -25,7 +27,7 @@ export default function NavBar(): JSX.Element {
 					<Offcanvas.Body>
 						<Nav className="justify-content-end flex-grow-1 pe-3">
 							<Nav.Link href="#action1">Home</Nav.Link>
-							<Nav.Link href="#action2">Link</Nav.Link>
+							{/* <Nav.Link href="#action2">Link</Nav.Link>
 							<NavDropdown
 								title="Dropdown"
 								id={`offcanvasNavbarDropdown-expand-${expand}`}
@@ -36,9 +38,10 @@ export default function NavBar(): JSX.Element {
 								<NavDropdown.Item href="#action5">
 									Something else here
 								</NavDropdown.Item>
-							</NavDropdown>
+							</NavDropdown> */}
 						</Nav>
 						<SearchTerm />
+						<DarkModeSwitch />
 					</Offcanvas.Body>
 				</Navbar.Offcanvas>
 			</Container>

@@ -17,7 +17,7 @@ export default function SearchTerm() {
 	};
 
 	return (
-		<InputGroup className="position-relative w-auto">
+		<InputGroup className="position-relative w-auto my-3 my-md-0">
 			<InputGroup.Text>
 				<Icon iconName="Search" />
 			</InputGroup.Text>
