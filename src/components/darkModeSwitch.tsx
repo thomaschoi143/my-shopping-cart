@@ -5,16 +5,18 @@ const DarkModeSwitch = () => {
 	const storedTheme = localStorage.getItem("theme");
 
 	const getPreferredTheme = () => {
-		// if (storedTheme) {
-		// 	return storedTheme;
-		// }
+		if (storedTheme) {
+			return storedTheme === "dark";
+		}
 		return window.matchMedia("(prefers-color-scheme: dark)").matches ? true : false;
 	};
 
 	const [isDarkMode, setIsDarkMode] = useState<boolean>(getPreferredTheme());
 	if (isDarkMode) {
+		localStorage.setItem("theme", "dark");
 		document.documentElement.setAttribute("data-bs-theme", "dark");
 	} else {
+		localStorage.setItem("theme", "light");
 		document.documentElement.setAttribute("data-bs-theme", "light");
 	}
 
