@@ -32,7 +32,11 @@ export const handlers = [
 
 		const itemComments = comments.filter((comment) => comment.itemName === itemName);
 
-		return res(ctx.delay(API_DELAY_MS), ctx.status(200), ctx.json(itemComments.concat(userItemComments)));
+		return res(
+			ctx.delay(API_DELAY_MS),
+			ctx.status(200),
+			ctx.json(itemComments.concat(userItemComments))
+		);
 	}),
 	rest.post("/api/comments/:itemName", async (req, res, ctx) => {
 		const { itemName } = req.params;

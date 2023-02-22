@@ -35,5 +35,6 @@ const inventorySlice = createSlice({
 
 export const selectAllInventoryItems = (state: State) => state.inventory.storage;
 export const selectIsLoadingInventory = (state: State) => state.inventory.isLoading;
+export const selectHasErrorInventory = (state: State) => state.inventory.hasError;
 
 export default inventorySlice.reducer;

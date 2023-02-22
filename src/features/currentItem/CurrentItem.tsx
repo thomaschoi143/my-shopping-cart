@@ -34,7 +34,7 @@ const CurrentItem = ({ name }: CurrentItemProps) => {
 	}
 
 	if (failedToLoadCurrentItem) {
-		return <Navigate to="/not-found" />;
+		return <Navigate to={process.env.PUBLIC_URL + "/not-found"} />;
 	}
 
 	if (item) {
@@ -43,7 +43,7 @@ const CurrentItem = ({ name }: CurrentItemProps) => {
 			<Row xs={1} sm={2}>
 				<Col className="d-flex justify-content-center">
 					<Figure>
-						<Figure.Image src={picture} />
+						<Figure.Image src={process.env.PUBLIC_URL + picture} />
 						<Figure.Caption>{name}</Figure.Caption>
 					</Figure>
 				</Col>

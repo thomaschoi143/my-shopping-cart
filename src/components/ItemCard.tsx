@@ -16,7 +16,7 @@ const ItemCard = ({ item }: ItemCardProps) => {
 		<Col>
 			<Card>
 				<Link to={`items/${name}`}>
-					<Card.Img variant="top" src={picture}></Card.Img>
+					<Card.Img variant="top" src={process.env.PUBLIC_URL + picture}></Card.Img>
 				</Link>
 				<Card.Body>
 					<Link to={`items/${name}`}>

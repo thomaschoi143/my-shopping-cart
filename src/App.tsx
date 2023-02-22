@@ -10,22 +10,19 @@ import {
 } from "react-router-dom";
 import HomePage from "./pages/home";
 import ItemDetailsPage from "./pages/itemDetails";
-import NotFoundPage from "./pages/notFound";
-
-if (process.env.NODE_ENV === "development") {
-}
-
-const { worker } = require("./mocks/browser");
-worker.start();
+import ErrorAlert from "./components/ErrorAlert";
 
 const appRouter = createBrowserRouter(
 	createRoutesFromElements(
-		<Route path="/" element={<Root />}>
+		<Route path="/" element={<Root />} errorElement={<ErrorAlert />}>
 			<Route index element={<HomePage />} />
 			<Route path="items/:name" element={<ItemDetailsPage />} />
-			<Route path="not-found" element={<NotFoundPage />} />
+			<Route path="not-found" element={<ErrorAlert />} />
 		</Route>
-	)
+	),
+	{
+		basename: process.env.PUBLIC_URL,
+	}
 );
 
 function App() {
