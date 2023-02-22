@@ -7,18 +7,18 @@ import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 
 async function main() {
-	if (process.env.NODE_ENV === "development") {
-		if (window.location.pathname === process.env.PUBLIC_URL) {
-			window.location.pathname = process.env.PUBLIC_URL + "/";
-			return;
-		}
-		const { worker } = require("./mocks/browser");
-		await worker.start({
-			serviceWorker: {
-				url: process.env.PUBLIC_URL + "/mockServiceWorker.js",
-			},
-		});
+	// if (process.env.NODE_ENV === "development") {
+	if (window.location.pathname === process.env.PUBLIC_URL) {
+		window.location.pathname = process.env.PUBLIC_URL + "/";
+		return;
 	}
+	const { worker } = require("./mocks/browser");
+	await worker.start({
+		serviceWorker: {
+			url: process.env.PUBLIC_URL + "/mockServiceWorker.js",
+		},
+	});
+	// }
 
 	const container = document.getElementById("root") as Element;
 	const root = createRoot(container);

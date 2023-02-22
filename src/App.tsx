@@ -11,12 +11,14 @@ import {
 import HomePage from "./pages/home";
 import ItemDetailsPage from "./pages/itemDetails";
 import ErrorAlert from "./components/ErrorAlert";
+import CheckOutPage from "./pages/checkOut";
 
 const appRouter = createBrowserRouter(
 	createRoutesFromElements(
 		<Route path="/" element={<Root />} errorElement={<ErrorAlert />}>
 			<Route index element={<HomePage />} />
 			<Route path="items/:name" element={<ItemDetailsPage />} />
+			<Route path="check-out" element={<CheckOutPage />} />
 			<Route path="not-found" element={<ErrorAlert />} />
 		</Route>
 	),

@@ -6,11 +6,13 @@ import { calculateTotal } from "../../utilities/utilities";
 import { Button, Form, ListGroup, Col, Row } from "react-bootstrap";
 import { Icon } from "../../utilities/Icon";
 import PriceDisplay from "../../components/PriceDisplay";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
 	const dispatch = useDispatch();
 	const items = useSelector(selectCartItems);
 	const totalAmount = calculateTotal(items);
+	const navigate = useNavigate();
 
 	const quantityOnChangeHandler = (name, quantity) => {
 		quantity = Number(quantity);
@@ -24,10 +26,6 @@ export default function Cart() {
 
 	const removeOnClickHandler = (name) => {
 		dispatch(removeItem(name));
-	};
-
-	const checkOutHandler = () => {
-		alert(`Total: ${totalAmount}`);
 	};
 
 	const createCartElement = (name) => {
@@ -84,7 +82,7 @@ export default function Cart() {
 			<Row sm={3} lg={4} className="flex-row-reverse">
 				<Col>
 					<Button
-						onClick={checkOutHandler}
+						onClick={() => navigate("/check-out")}
 						className={`p-2 p-sm-1 fs-4 fw-bold w-100 ${
 							Object.keys(items).length === 0 ? "disabled" : undefined
 						}`}
