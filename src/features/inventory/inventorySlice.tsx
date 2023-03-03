@@ -1,9 +1,11 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { getInventory } from "../../api";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import StoreDataService from "../../services";
 import { State, StorageSlice } from "../../app/state";
 import { Item } from "../../app/types";
 
-export const loadInventory = createAsyncThunk("loadInventory", async () => await getInventory());
+export const loadInventory = createAsyncThunk("inventory/loadInventory", async () => {
+	return (await StoreDataService.getInventory()).data;
+});
 
 const initialState: StorageSlice<Item[]> = {
 	storage: [],
@@ -21,8 +23,8 @@ const inventorySlice = createSlice({
 				inventory.isLoading = true;
 				inventory.hasError = false;
 			})
-			.addCase(loadInventory.fulfilled, (inventory, action: PayloadAction<Item[]>) => {
-				inventory.storage = action.payload;
+			.addCase(loadInventory.fulfilled, (inventory, { payload }) => {
+				inventory.storage = payload.inventory;
 				inventory.isLoading = false;
 				inventory.hasError = false;
 			})

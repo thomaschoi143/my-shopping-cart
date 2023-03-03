@@ -1,9 +1,10 @@
 export interface Item {
+	_id: string;
 	name: string;
 	price: number;
 	picture: string;
 	description: string;
-	comments: Comment[];
+	comments?: Comment[];
 	size?: Size[];
 }
 
