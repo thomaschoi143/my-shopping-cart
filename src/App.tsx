@@ -17,7 +17,7 @@ const appRouter = createBrowserRouter(
 	createRoutesFromElements(
 		<Route path="/" element={<Root />}>
 			<Route index element={<HomePage />} />
-			<Route path="items/:name" element={<ItemDetailsPage />} />
+			<Route path="items/:id" element={<ItemDetailsPage />} />
 			<Route path="check-out" element={<CheckOutPage />} />
 			<Route path="not-found" element={<ErrorAlert />} />
 		</Route>

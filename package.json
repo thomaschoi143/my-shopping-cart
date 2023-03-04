@@ -4,6 +4,7 @@
   "homepage": "https://thomaschoi143.github.io/my-shopping-cart/",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.7.9",
     "@reduxjs/toolkit": "^1.9.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -14,6 +15,7 @@
     "@types/react-dom": "^18.0.11",
     "axios": "^0.21.1",
     "bootstrap": "^5.3.0-alpha1",
+    "graphql": "^16.6.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.1",
     "react-bootstrap-icons": "^1.10.2",
@@ -22,6 +24,7 @@
     "react-router-dom": "^6.8.2",
     "react-scripts": "5.0.1",
     "react-simple-star-rating": "^5.1.7",
+    "realm-web": "^2.0.0",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -31,7 +34,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "compile": "graphql-codegen"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +56,8 @@
     ]
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^3.2.1",
+    "@graphql-codegen/client-preset": "^2.1.0",
     "gh-pages": "^5.0.0"
   },
   "msw": {

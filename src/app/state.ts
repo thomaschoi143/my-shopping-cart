@@ -1,17 +1,9 @@
-import { Item, Currency, Comment } from "./types";
+import { Item, Currency } from "./types";
 
 export interface StorageSlice<T> {
 	storage: T | null;
 	isLoading: boolean;
 	hasError: boolean;
-}
-
-export interface Comments {
-	commentsList: Comment[];
-	isLoadingComments: boolean;
-	failedToLoadComments: boolean;
-	createCommentIsPending: boolean;
-	failedToCreateComment: boolean;
 }
 
 export interface Cart {
@@ -29,7 +21,6 @@ export interface CurrencyFilter {
 export interface State {
 	inventory: StorageSlice<Item[]>;
 	currentItem: StorageSlice<Item>;
-	comments: Comments;
 	cart: Cart;
 	searchTerm: string;
 	currencyFilter: CurrencyFilter;

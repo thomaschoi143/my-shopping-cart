@@ -1,52 +1,58 @@
 import React, { useState } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import { Icon } from "../../utilities/Icon";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import {
-	createCommentForItemName,
-	selectCreateCommentIsPending,
-	selectFailedToCreateComment,
-	setFailedToCreateComment,
-} from "./commentsSlice";
-import { Comment } from "../../app/types";
+import { Review } from "../../app/types";
 import { Rating } from "react-simple-star-rating";
+import { ApolloQueryResult, useMutation } from "@apollo/client";
+import { ADD_REVIEW } from "../../services/graphQL";
 
-type CommentFormProps = {
-	itemName: string;
+type ReviewFormProps = {
+	item_id: string;
+	refetch: (
+		variables?: Partial<{
+			input: {
+				id: string;
+			};
+		}>
+	) => Promise<ApolloQueryResult<any>>;
 };
 
-const CommentForm = ({ itemName }: CommentFormProps) => {
-	const dispatch = useAppDispatch();
+const ReviewForm = ({ item_id, refetch }: ReviewFormProps) => {
+	// Form State
 	const [isRecommend, setIsRecommend] = useState<boolean | null>(null);
 	const [text, setText] = useState<string>("");
 	const [rating, setRating] = useState<number>(0);
 	const [validated, setValidated] = useState<boolean>(false);
-	const createCommentIsPending = useAppSelector(selectCreateCommentIsPending);
-	const failedToCreateComment = useAppSelector(selectFailedToCreateComment);
 
-	const submitHandler: React.FormEventHandler<HTMLFormElement> = (e) => {
+	const [addReview, { loading, error }] = useMutation(ADD_REVIEW);
+
+	const submitHandler: React.FormEventHandler<HTMLFormElement> = async (e) => {
 		e.preventDefault();
 		e.stopPropagation();
 		const form = e.currentTarget;
 		setValidated(true);
-		dispatch(setFailedToCreateComment(false));
 		if (form.checkValidity() === true && rating > 0 && isRecommend !== null) {
-			const comment: Comment = {
-				itemName,
-				author: "user",
-				text,
-				rating,
-				isRecommend,
-				date: getDatetimeNow(),
-			};
-			dispatch(createCommentForItemName(comment)).then(() => {
-				if (!createCommentIsPending && !failedToCreateComment) {
-					setIsRecommend(null);
-					setText("");
-					setRating(0);
-					setValidated(false);
-				}
+			await addReview({
+				variables: {
+					data: {
+						userId: "1235",
+						name: "User",
+						text,
+						rating,
+						isRecommend,
+						date: new Date().toISOString(),
+						item_id,
+					},
+				},
 			});
+			if (!loading && !error) {
+				// added review successfully
+				setIsRecommend(null);
+				setText("");
+				setRating(0);
+				setValidated(false);
+				refetch();
+			}
 		}
 	};
 
@@ -146,10 +152,10 @@ const CommentForm = ({ itemName }: CommentFormProps) => {
 			</Form.Group>
 			<Form.Group as={Row} className="mb-3">
 				<Col sm={{ span: 3, offset: 3 }} lg={{ offset: 2 }}>
-					<Button type="submit" className="w-100" disabled={createCommentIsPending}>
-						{createCommentIsPending ? "Loading..." : "Submit"}
+					<Button type="submit" className="w-100" disabled={loading}>
+						{loading ? "Loading..." : "Submit"}
 					</Button>
-					{!createCommentIsPending && failedToCreateComment && (
+					{!loading && error && (
 						<div className="invalid-feedback d-block">Sorry, something went wrong.</div>
 					)}
 				</Col>
@@ -158,12 +164,4 @@ const CommentForm = ({ itemName }: CommentFormProps) => {
 	);
 };
 
-const getDatetimeNow = () => {
-	const date = new Date();
-
-	return `${date.getFullYear()}-${
-		date.getMonth() + 1
-	}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-};
-
-export default CommentForm;
+export default ReviewForm;

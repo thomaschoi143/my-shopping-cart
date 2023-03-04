@@ -3,11 +3,13 @@ import CurrencyFilter from "../../features/currencyFilter/CurrencyFilter";
 import Inventory from "../../features/inventory/Inventory";
 import Cart from "../../features/cart/Cart";
 import { Container } from "react-bootstrap";
+import SearchBar from "../../features/searchBar/SearchBar";
 
 const HomePage = () => {
 	return (
 		<>
-			<Container className="flex-grow-1 overflow-scroll">
+			<Container className="flex-grow-1 overflow-scroll pt-2">
+				<SearchBar />
 				<CurrencyFilter />
 				<Inventory />
 			</Container>

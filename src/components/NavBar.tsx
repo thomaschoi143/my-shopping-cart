@@ -1,14 +1,13 @@
 import React from "react";
 import { Navbar, Container, Offcanvas, NavDropdown, Nav, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import SearchTerm from "../features/searchTerm/SearchTerm";
 import DarkModeSwitch from "./darkModeSwitch";
 
 export default function NavBar() {
 	const expand = "md";
 
 	return (
-		<Navbar expand={expand} className="mb-3">
+		<Navbar expand={expand}>
 			<Container fluid>
 				<Link to="/">
 					<Navbar.Brand className="h1">My Shopping Cart</Navbar.Brand>
@@ -40,7 +39,6 @@ export default function NavBar() {
 								</NavDropdown.Item>
 							</NavDropdown> */}
 						</Nav>
-						<SearchTerm />
 						<DarkModeSwitch />
 					</Offcanvas.Body>
 				</Navbar.Offcanvas>

@@ -10,16 +10,16 @@ type ItemCardProps = {
 };
 
 const ItemCard = ({ item }: ItemCardProps) => {
-	const { name, price, picture } = item;
+	const { _id, name, price, picture } = item;
 
 	return (
 		<Col>
 			<Card>
-				<Link to={`items/${name}`}>
+				<Link to={`items/${_id}`}>
 					<Card.Img variant="top" src={process.env.PUBLIC_URL + picture}></Card.Img>
 				</Link>
 				<Card.Body>
-					<Link to={`items/${name}`}>
+					<Link to={`items/${_id}`}>
 						<Card.Title>{name}</Card.Title>
 						<Card.Subtitle className="mb-3">
 							<PriceDisplay price={price} />
