@@ -1,18 +1,24 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { GET_ITEMS } from "../../services/graphQL";
-import Item from "../../components/ItemCard";
-import { filterItems } from "../../utilities/utilities";
+import { FIND_ITEMS } from "../../services/graphQL";
+import ItemCard from "../../components/ItemCard";
+import { Item } from "../../app/types";
 import { selectSearchTerm } from "../searchBar/searchTermSlice";
 import { Row } from "react-bootstrap";
 import PlaceholderCard from "../../components/PlaceholderCard";
 import { INVENTORY_PLACEHOLDER_NUM } from "../../app/constants";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppSelector } from "../../app/hooks";
 import ErrorAlert from "../../components/ErrorAlert";
 
 export default function Inventory() {
 	const searchTerm = useAppSelector(selectSearchTerm);
-	const { loading, data, error } = useQuery(GET_ITEMS);
+	const { loading, data, error, refetch } = useQuery(FIND_ITEMS, {
+		variables: {
+			input: {
+				page: 0,
+			},
+		},
+	});
 
 	if (loading) {
 		return (
@@ -28,17 +34,19 @@ export default function Inventory() {
 		return <ErrorAlert message="Load inventory failed." />;
 	}
 
-	const { items } = data;
-	const filteredItems = filterItems(searchTerm, items);
+	let items: Item[] = [];
+	const responseData = data.itemsByPage;
+	const { displayResultLength } = responseData;
+	items = responseData.items;
 
-	if (filteredItems.length === 0) {
+	if (displayResultLength === 0) {
 		return <p className="h2 mt-5 text-center">Sorry, no products are currently available...</p>;
 	}
 
 	return (
 		<Row xs={2} md={4} className="g-md-3 g-2">
-			{filteredItems.map((item, index) => (
-				<Item key={index} item={item} />
+			{items.map((item, index) => (
+				<ItemCard key={index} item={item} />
 			))}
 		</Row>
 	);

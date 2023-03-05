@@ -14,7 +14,7 @@ const app = new Realm.App(process.env.REACT_APP_REALM_APP_ID);
 async function getValidAccessToken() {
 	// Guarantee that there's a logged in user with a valid access token
 	if (!app.currentUser) {
-		await app.logIn(Realm.Credentials.apiKey(process.env.REACT_APP_API_KEY));
+		await app.logIn(Realm.Credentials.anonymous());
 	} else {
 		// An already logged in user's access token might be stale. To guarantee that the token is
 		// valid, we refresh the user's custom data which also refreshes their access token.

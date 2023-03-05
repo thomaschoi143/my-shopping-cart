@@ -1,14 +1,20 @@
 import gql from "graphql-tag";
 
-export const GET_ITEMS = gql`
-	query items($query: ItemQueryInput, $limit: Int, $sortBy: ItemSortByInput) {
-		items(query: $query, limit: $limit, sortBy: $sortBy) {
-			_id
-			category
-			description
-			name
-			picture
-			price
+export const FIND_ITEMS = gql`
+	query itemsByPage($input: ItemsByPageQueryInput) {
+		itemsByPage(input: $input) {
+			displayResultLength
+			filter
+			itemsPerPage
+			page
+			totalResultLength
+			items {
+				_id
+				name
+				price
+				picture
+				category
+			}
 		}
 	}
 `;
