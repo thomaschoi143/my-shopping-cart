@@ -1,54 +1,59 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setSearchTerm, clearSearchTerm, selectSearchTerm } from "./searchTermSlice";
-import { Form, InputGroup, CloseButton, Row, Col, Button } from "react-bootstrap";
-import { Icon } from "../../utilities/Icon";
+import { Form, Row, Col, Button } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
 import { GET_CATEGORIES } from "../../services/graphQL";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-export default function SearchBar() {
-	const dispatch = useDispatch();
-	const searchTerm = useSelector(selectSearchTerm);
+type SearchBarProps = {
+	setSearchParams: any;
+};
 
-	const { data, loading, error } = useQuery(GET_CATEGORIES);
+export default function SearchBar({ setSearchParams }: SearchBarProps) {
+	// TODO: don't use state for each input
+	const [searchTerm, setSearchTerm] = useState<string>("");
+	const [category, setCategory] = useState<string>("");
+
+	const { data } = useQuery(GET_CATEGORIES);
 
 	let categories: string[] = [];
 	if (data) {
 		categories = data.categories;
 	}
 
-	const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-		dispatch(setSearchTerm(e.currentTarget.value));
-	};
-
-	const onClearHandler = () => {
-		dispatch(clearSearchTerm());
+	const onSubmitHandler: React.FormEventHandler<HTMLFormElement> = (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		let queries: { [key: string]: string } = {};
+		if (searchTerm) {
+			queries.search = searchTerm;
+		}
+		if (category) {
+			queries.category = category;
+		}
+		setSearchParams("?" + new URLSearchParams(queries).toString());
 	};
 
 	return (
-		<Form className="mb-2">
+		<Form className="mb-2" onSubmit={onSubmitHandler}>
 			<Row xs={1} className="g-2">
 				<Col md={5}>
 					<Form.Control
 						type="text"
-						onChange={onChangeHandler}
+						onChange={({ target }) => setSearchTerm(target.value)}
 						value={searchTerm}
 						placeholder="Search"
-						style={{ paddingRight: 46 }}
-					></Form.Control>
-					{searchTerm.length > 0 && (
-						<CloseButton
-							onClick={onClearHandler}
-							className="position-absolute top-1 end-0"
-							style={{ zIndex: 2000, padding: "11px 12px" }}
-						/>
-					)}
+					/>
 				</Col>
 				<Col md={5}>
-					<Form.Select aria-label="select category">
-						<option>All categories</option>
+					<Form.Select
+						aria-label="select category"
+						onChange={({ target }) => setCategory(target.value)}
+					>
+						<option value="">All categories</option>
 						{categories.map((category, index) => (
-							<option key={index}>{category}</option>
+							<option key={index} value={category}>
+								{category}
+							</option>
 						))}
 					</Form.Select>
 				</Col>

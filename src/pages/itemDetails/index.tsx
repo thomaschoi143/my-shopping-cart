@@ -2,7 +2,7 @@ import React from "react";
 import { Navigate, useParams } from "react-router-dom";
 import CurrencyFilter from "../../features/currencyFilter/CurrencyFilter";
 import ReviewsSection from "../../features/review/ReviewsSection";
-import { Container, Spinner, Row, Col } from "react-bootstrap";
+import { Container, Spinner } from "react-bootstrap";
 import CurrentItem from "../../features/currentItem/CurrentItem";
 import { useQuery } from "@apollo/client";
 import { FIND_ITEM } from "../../services/graphQL";

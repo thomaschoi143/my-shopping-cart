@@ -3,19 +3,22 @@ import { useQuery } from "@apollo/client";
 import { FIND_ITEMS } from "../../services/graphQL";
 import ItemCard from "../../components/ItemCard";
 import { Item } from "../../app/types";
-import { selectSearchTerm } from "../searchBar/searchTermSlice";
 import { Row } from "react-bootstrap";
 import PlaceholderCard from "../../components/PlaceholderCard";
 import { INVENTORY_PLACEHOLDER_NUM } from "../../app/constants";
-import { useAppSelector } from "../../app/hooks";
 import ErrorAlert from "../../components/ErrorAlert";
 
-export default function Inventory() {
-	const searchTerm = useAppSelector(selectSearchTerm);
-	const { loading, data, error, refetch } = useQuery(FIND_ITEMS, {
+type InventoryProps = {
+	searchParams: URLSearchParams;
+};
+
+export default function Inventory({ searchParams }: InventoryProps) {
+	const { loading, data, error } = useQuery(FIND_ITEMS, {
 		variables: {
 			input: {
 				page: 0,
+				text: searchParams.get("search"),
+				category: searchParams.get("category"),
 			},
 		},
 	});
@@ -31,7 +34,7 @@ export default function Inventory() {
 	}
 
 	if (error) {
-		return <ErrorAlert message="Load inventory failed." />;
+		return <ErrorAlert message="Failed to load the inventory." />;
 	}
 
 	let items: Item[] = [];
