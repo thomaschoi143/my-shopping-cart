@@ -29,8 +29,6 @@ const ItemDetailsPage = () => {
 
 	const item = data.itemDetails;
 
-	console.log(item);
-
 	return (
 		<Container>
 			<CurrencyFilter />
