@@ -7,9 +7,8 @@ import * as Realm from "realm-web";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
-
-const app = new Realm.App(process.env.REACT_APP_REALM_APP_ID);
-
+import { setUser } from "./features/user/userSlice";
+export const app = new Realm.App(process.env.REACT_APP_REALM_APP_ID);
 // Gets a valid Realm user access token to authenticate requests
 async function getValidAccessToken() {
 	// Guarantee that there's a logged in user with a valid access token
@@ -18,10 +17,9 @@ async function getValidAccessToken() {
 	} else {
 		// An already logged in user's access token might be stale. To guarantee that the token is
 		// valid, we refresh the user's custom data which also refreshes their access token.
-		console.log("Already logged in");
 		await app.currentUser.refreshCustomData();
 	}
-	console.log(app.currentUser);
+	store.dispatch(setUser({ id: app.currentUser.id, profile: app.currentUser.profile }));
 	return app.currentUser.accessToken;
 }
 

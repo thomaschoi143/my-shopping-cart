@@ -12,6 +12,8 @@ import HomePage from "./pages/home";
 import ItemDetailsPage from "./pages/itemDetails";
 import ErrorAlert from "./components/ErrorAlert";
 import CheckOutPage from "./pages/checkOut";
+import LoginPage from "./pages/login";
+import RegisterPage from "./pages/Register";
 
 const appRouter = createBrowserRouter(
 	createRoutesFromElements(
@@ -19,6 +21,8 @@ const appRouter = createBrowserRouter(
 			<Route index element={<HomePage />} />
 			<Route path="items/:id" element={<ItemDetailsPage />} />
 			<Route path="check-out" element={<CheckOutPage />} />
+			<Route path="login" element={<LoginPage />} />
+			<Route path="register" element={<RegisterPage />} />
 			<Route path="not-found" element={<ErrorAlert />} />
 		</Route>
 	),

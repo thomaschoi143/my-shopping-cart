@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import CurrencyFilter from "../../features/currencyFilter/CurrencyFilter";
 import ReviewsSection from "../../features/review/ReviewsSection";
-import { Container, Spinner } from "react-bootstrap";
+import { Container, Spinner, Alert } from "react-bootstrap";
 import CurrentItem from "../../features/currentItem/CurrentItem";
 import { useQuery } from "@apollo/client";
 import { FIND_ITEM } from "../../services/graphQL";
 import ReviewForm from "../../features/review/ReviewForm";
+import { app } from "../../index";
+import { useSelector } from "react-redux";
+import { selectIsProfileLogin } from "../../features/user/userSlice";
 
 const ItemDetailsPage = () => {
+	const isProfileLogin = useSelector(selectIsProfileLogin);
 	const { id } = useParams<{ id: string }>();
 
 	const { loading, data, error, refetch } = useQuery(FIND_ITEM, {
@@ -34,7 +38,11 @@ const ItemDetailsPage = () => {
 			<CurrencyFilter />
 			<CurrentItem item={item} />
 			<ReviewsSection reviews={item.reviews} />
-			<ReviewForm item_id={id} refetch={refetch} />
+			{isProfileLogin ? (
+				<ReviewForm item_id={id} refetch={refetch} />
+			) : (
+				<Alert variant="secondary">Log in to comment.</Alert>
+			)}
 		</Container>
 	);
 };

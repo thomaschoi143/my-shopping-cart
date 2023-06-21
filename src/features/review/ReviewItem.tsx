@@ -15,7 +15,9 @@ const CommentItem = ({ review }: CommentProps) => {
 	return (
 		<Row className="my-4">
 			<Col sm={2}>
-				<p className="h4">{name}</p>
+				<p className="h4" style={{ wordBreak: "break-word" }}>
+					{name}
+				</p>
 			</Col>
 			<Col>
 				{[...Array(rating)].map((_, index) => (

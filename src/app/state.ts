@@ -18,10 +18,13 @@ export interface CurrencyFilter {
 	selected: Currency;
 }
 
+export interface User {
+	id: string;
+	profile: Realm.DefaultUserProfileData;
+}
+
 export interface State {
-	inventory: StorageSlice<Item[]>;
-	currentItem: StorageSlice<Item>;
 	cart: Cart;
-	searchTerm: string;
 	currencyFilter: CurrencyFilter;
+	user: User;
 }

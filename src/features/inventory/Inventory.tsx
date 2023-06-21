@@ -34,7 +34,7 @@ export default function Inventory({ searchParams }: InventoryProps) {
 	}
 
 	if (error) {
-		return <ErrorAlert message="Failed to load the inventory." />;
+		return <ErrorAlert message="Cannot find the inventory." />;
 	}
 
 	let items: Item[] = [];

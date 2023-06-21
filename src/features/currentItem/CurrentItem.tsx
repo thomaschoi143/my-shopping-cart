@@ -14,7 +14,7 @@ const CurrentItem = ({ item }: CurrentItemProps) => {
 		<Row xs={1} sm={2}>
 			<Col className="d-flex justify-content-center">
 				<Figure>
-					<Figure.Image src={process.env.PUBLIC_URL + picture} />
+					<Figure.Image src={process.env.PUBLIC_URL + picture} width={200} height={200} />
 					<Figure.Caption>{name}</Figure.Caption>
 				</Figure>
 			</Col>

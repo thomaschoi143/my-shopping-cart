@@ -5,6 +5,8 @@ import { Review } from "../../app/types";
 import { Rating } from "react-simple-star-rating";
 import { ApolloQueryResult, useMutation } from "@apollo/client";
 import { ADD_REVIEW } from "../../services/graphQL";
+import { useSelector } from "react-redux";
+import { selectUserEmail, selectUserId } from "../user/userSlice";
 
 type ReviewFormProps = {
 	item_id: string;
@@ -24,6 +26,8 @@ const ReviewForm = ({ item_id, refetch }: ReviewFormProps) => {
 	const [rating, setRating] = useState<number>(0);
 	const [validated, setValidated] = useState<boolean>(false);
 
+	const userId: string = useSelector(selectUserId);
+	const userEmail: string = useSelector(selectUserEmail);
 	const [addReview, { loading, error }] = useMutation(ADD_REVIEW);
 
 	const submitHandler: React.FormEventHandler<HTMLFormElement> = async (e) => {
@@ -35,8 +39,8 @@ const ReviewForm = ({ item_id, refetch }: ReviewFormProps) => {
 			await addReview({
 				variables: {
 					data: {
-						userId: "1235",
-						name: "User",
+						userId,
+						name: userEmail,
 						text,
 						rating,
 						isRecommend,
