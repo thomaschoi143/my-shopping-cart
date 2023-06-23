@@ -17,7 +17,7 @@ const userSlice = createSlice({
 
 export const { setUser } = userSlice.actions;
 export const selectIsProfileLogin = (state: State) =>
-	state.user?.profile ? Object.keys(state.user?.profile).length != 0 : false;
+	state.user?.profile ? Object.keys(state.user?.profile).length !== 0 : false;
 export const selectUserId = (state: State) => state.user?.id;
 export const selectUserEmail = (state: State) => state.user?.profile?.email;
 

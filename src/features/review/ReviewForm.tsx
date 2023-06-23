@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import { Icon } from "../../utilities/Icon";
-import { Review } from "../../app/types";
 import { Rating } from "react-simple-star-rating";
 import { ApolloQueryResult, useMutation } from "@apollo/client";
 import { ADD_REVIEW } from "../../services/graphQL";

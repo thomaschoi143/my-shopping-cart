@@ -1,15 +1,23 @@
-import React, { FormEventHandler, useState } from "react";
-import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
+import React, { useState } from "react";
+import { Form, Button, Container, Row, Col, Alert, Tabs, Tab } from "react-bootstrap";
 import { app } from "../../index";
 import * as Realm from "realm-web";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser, selectIsProfileLogin } from "../../features/user/userSlice";
+import {
+	setUser,
+	selectIsProfileLogin,
+	selectUserEmail,
+	selectUserId,
+} from "../../features/user/userSlice";
 
 const LoginPage = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const isProfileLogin = useSelector(selectIsProfileLogin);
+	const userEmail = useSelector(selectUserEmail);
+	const userId = useSelector(selectUserId);
+
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [loginError, setLoginError] = useState(false);
@@ -39,6 +47,22 @@ const LoginPage = () => {
 			navigate(-1);
 		}
 	};
+
+	if (isProfileLogin) {
+		return (
+			<Container>
+				<Tabs defaultActiveKey="profile" className="mb-3">
+					<Tab eventKey="profile" title="profile">
+						<p>User ID: {userId}</p>
+						<p>Email: {userEmail}</p>
+					</Tab>
+					<Tab eventKey="contact" title="Contact">
+						Tab content for Contact
+					</Tab>
+				</Tabs>
+			</Container>
+		);
+	}
 
 	return (
 		<>

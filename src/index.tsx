@@ -7,7 +7,7 @@ import * as Realm from "realm-web";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
-import { setUser } from "./features/user/userSlice";
+
 export const app = new Realm.App(process.env.REACT_APP_REALM_APP_ID);
 // Gets a valid Realm user access token to authenticate requests
 async function getValidAccessToken() {
@@ -19,7 +19,6 @@ async function getValidAccessToken() {
 		// valid, we refresh the user's custom data which also refreshes their access token.
 		await app.currentUser.refreshCustomData();
 	}
-	store.dispatch(setUser({ id: app.currentUser.id, profile: app.currentUser.profile }));
 	return app.currentUser.accessToken;
 }
 

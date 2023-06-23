@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Navigate, useParams } from "react-router-dom";
 import CurrencyFilter from "../../features/currencyFilter/CurrencyFilter";
 import ReviewsSection from "../../features/review/ReviewsSection";
@@ -7,7 +7,6 @@ import CurrentItem from "../../features/currentItem/CurrentItem";
 import { useQuery } from "@apollo/client";
 import { FIND_ITEM } from "../../services/graphQL";
 import ReviewForm from "../../features/review/ReviewForm";
-import { app } from "../../index";
 import { useSelector } from "react-redux";
 import { selectIsProfileLogin } from "../../features/user/userSlice";
 

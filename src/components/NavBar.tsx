@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Navbar, Container, Offcanvas, NavDropdown, Nav, Form, Row, Button } from "react-bootstrap";
+import React from "react";
+import { Navbar, Container, Offcanvas, Nav, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import DarkModeSwitch from "./darkModeSwitch";
 import { app } from "../index";

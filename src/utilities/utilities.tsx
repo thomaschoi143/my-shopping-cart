@@ -1,6 +1,5 @@
 import { Item } from "../app/types";
 import { Cart } from "../app/state";
-import { stringify } from "querystring";
 
 export const calculateTotal = (cart: Cart) => {
 	let total = 0;

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
 import { GET_CATEGORIES } from "../../services/graphQL";
-import { useNavigate, useSearchParams } from "react-router-dom";
 
 type SearchBarProps = {
 	setSearchParams: any;

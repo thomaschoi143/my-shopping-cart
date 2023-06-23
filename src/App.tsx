@@ -14,6 +14,9 @@ import ErrorAlert from "./components/ErrorAlert";
 import CheckOutPage from "./pages/checkOut";
 import LoginPage from "./pages/login";
 import RegisterPage from "./pages/Register";
+import { setUser } from "./features/user/userSlice";
+import { useDispatch } from "react-redux";
+import { app } from "./index";
 
 const appRouter = createBrowserRouter(
 	createRoutesFromElements(
@@ -32,6 +35,8 @@ const appRouter = createBrowserRouter(
 );
 
 function App() {
+	const dispatch = useDispatch();
+	dispatch(setUser({ id: app.currentUser.id, profile: app.currentUser.profile }));
 	return <RouterProvider router={appRouter} />;
 }
 
